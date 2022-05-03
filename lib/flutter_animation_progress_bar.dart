@@ -3,14 +3,14 @@ import 'package:flutter/widgets.dart';
 
 class FAProgressBar extends StatefulWidget {
   FAProgressBar({
-    Key? key,
+    Key key,
     this.currentValue = 0,
     this.maxValue = 100,
     this.size = 30,
     this.animatedDuration = const Duration(milliseconds: 300),
     this.direction = Axis.horizontal,
     this.verticalDirection = VerticalDirection.down,
-    BorderRadiusGeometry? borderRadius,
+    BorderRadiusGeometry borderRadius,
     this.border,
     this.backgroundColor = const Color(0x00FFFFFF),
     this.progressColor = const Color(0xFFFA7268),
@@ -21,19 +21,19 @@ class FAProgressBar extends StatefulWidget {
         const TextStyle(color: const Color(0xFFFFFFFF), fontSize: 12),
   })  : _borderRadius = borderRadius ?? BorderRadius.circular(8),
         super(key: key);
-  final double currentValue;
+  final int currentValue;
   final double maxValue;
   final double size;
   final Duration animatedDuration;
   final Axis direction;
   final VerticalDirection verticalDirection;
   final BorderRadiusGeometry _borderRadius;
-  final BoxBorder? border;
+  final BoxBorder border;
   final Color backgroundColor;
   final Color progressColor;
-  final int? changeColorValue;
+  final int changeColorValue;
   final Color changeProgressColor;
-  final String? displayText;
+  final String displayText;
   final TextStyle displayTextStyle;
 
   @override
@@ -42,8 +42,8 @@ class FAProgressBar extends StatefulWidget {
 
 class _FAProgressBarState extends State<FAProgressBar>
     with SingleTickerProviderStateMixin {
-  late Animation<double> _animation;
-  late AnimationController _controller;
+   Animation<double> _animation;
+   AnimationController _controller;
   double _currentBegin = 0;
   double _currentEnd = 0;
 
@@ -96,9 +96,9 @@ class _FAProgressBarState extends State<FAProgressBar>
 
 class AnimatedProgressBar extends AnimatedWidget {
   AnimatedProgressBar({
-    Key? key,
-    required Animation<double> animation,
-    required this.widget,
+    Key key,
+     Animation<double> animation,
+     this.widget,
   }) : super(key: key, listenable: animation);
 
   final FAProgressBar widget;
@@ -123,7 +123,7 @@ class AnimatedProgressBar extends AnimatedWidget {
         widget.changeColorValue,
         widget.maxValue,
         5,
-      ))!;
+      ));
     }
 
     List<Widget> progressWidgets = [];
@@ -144,8 +144,8 @@ class AnimatedProgressBar extends AnimatedWidget {
                 ? FractionalOffset(0.5, 0.05)
                 : FractionalOffset(0.5, 0.95)),
         child: Text(
-          (animation.value * widget.maxValue).toDouble().toString() +
-              widget.displayText!,
+          (animation.value * widget.maxValue).toInt().toString() +
+              widget.displayText,
           softWrap: false,
           style: widget.displayTextStyle,
         ),
